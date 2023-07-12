@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,6 +23,8 @@ import { HoverDirective } from './Directives/hover/hover.directive';
 import { EmailValidatorDirective } from './Directives/hover/emailValidator/email-validator.directive';
 // import{RoomsModule} from '../app/Components/rooms/rooms.module'
 import { HeaderModule } from './Components/header/header.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { GlobalErrorHandler } from './errorhandler.service';
 
 function initFactory(initServics: InitService) {
   return () => initServics.init();
@@ -51,7 +53,7 @@ function initFactory(initServics: InitService) {
     FormsModule,
     HeaderModule,
     // RoomsModule,
-
+    MatSnackBarModule,
   ],
   providers: [
     {
@@ -69,6 +71,8 @@ function initFactory(initServics: InitService) {
       deps: [InitService],
       multi: true,
     },
+    { provide: ErrorHandler,
+     useClass: GlobalErrorHandler },
   ],
   bootstrap: [AppComponent],
 })

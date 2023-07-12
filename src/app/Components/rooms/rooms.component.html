@@ -6,37 +6,41 @@
   {{ rooms$ | async | json }}
 </div> -->
 <router-outlet></router-outlet>
-<div [hidden]="hiddenRooms">
+<!-- <div [hidden]="hiddenRooms">
   <p>Number Of Rooms :</p>
   <div [innerText]="roomsNumber"></div>
-</div>
-<hr />
-<h3>
-  <!-- {{getError$ | async}} -->
+</div> -->
+<!-- <hr /> -->
+<!-- <h3>
+  {{getError$ | async}}
   Rooms Count : {{ roomsCount$ | async }}
-</h3>
+</h3> -->
 <!-- {{room.availableRooms ?? "No Rooms"}} -->
 <div>
   <button class="btn btn-success" routerLink="add">Add Room</button>
 </div>
-<div>
+<!-- <div>
   {{ selectedRoom | json }}
-</div>
+</div> -->
+<!-- {{priceFilter | json}}
+<div>
+  <input type="number" class="form-control" [formControl]="priceFilter" />
+</div> -->
 <div *ngIf="rooms$ | async">
   <hInv-rooms-list
-    [rooms]="rooms$ | async"
+    [rooms]="rooms$ | async "
     (selectedRoom)="selectRoom($event)"
     [title]="title"
   ></hInv-rooms-list>
 </div>
 
-<button class="btn btn-secondary mt-3" (click)="ToggleFunc()">Toggle</button>
+<!-- <button class="btn btn-secondary mt-3" (click)="ToggleFunc()">Toggle</button>
 <button class="btn btn-primary mt-3 ms-3" (click)="editRoom()">
   Edit Room
 </button>
 <button class="btn btn-danger mt-3 ms-3" (click)="deleteRoom()">
   Delete Room
-</button>
+</button> -->
 <!-- <button class="btn btn-success mt-3 ms-3"  (click)="getPhotos()">Get Photos</button> -->
-
-<h2>{{ totalBytes }} Loaded..</h2>
+<!--
+<h2>{{ totalBytes }} Loaded..</h2> -->

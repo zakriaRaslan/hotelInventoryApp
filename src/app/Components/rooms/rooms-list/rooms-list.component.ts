@@ -5,16 +5,16 @@ import { RoomList } from '../room';
   selector: 'hInv-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RoomsListComponent implements OnInit,OnChanges,OnDestroy {
-@Input()rooms:RoomList[] | null = [];
+@Input() rooms:RoomList[] | null = []
 @Output() selectedRoom=new EventEmitter<RoomList>();
 @Input() title:string='';
 constructor(){}
 
 ngOnInit(): void {
-
+console.log(this.rooms);
 }
 
 ngOnChanges(changes: SimpleChanges): void {

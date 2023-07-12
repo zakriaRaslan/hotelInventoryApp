@@ -9,20 +9,27 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'employee',
-    loadChildren: async () =>
-      (await import('./Components/employee/employee.module')).EmployeeModule,
+    loadChildren: () =>
+      import('./Components/employee/employee.module').then(
+        (mod) => mod.EmployeeModule
+      ),
     canActivate: [IsLoggedInGuard],
   },
   {
     path: 'rooms',
     loadChildren: () =>
-      import('./Components/rooms/rooms.module').then((mod) => mod.RoomsModule),canActivate: [IsLoggedInGuard],
+      import('./Components/rooms/rooms.module').then((mod) => mod.RoomsModule),
+    // canActivate: [IsLoggedInGuard],
+    // canLoad: [IsLoggedInGuard],
   },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'booking',
-    loadChildren: async () =>
-      (await import('./Components/booking/booking.module')).BookingModule,canActivate: [IsLoggedInGuard]
+    path: 'booking/:roomId',
+    loadChildren: () =>
+      import('./Components/rooms/booking/booking.module').then(
+        (mod) => mod.BookingModule
+      ),
+    // canActivate: [IsLoggedInGuard],
   },
   {
     path: 'noAccess',

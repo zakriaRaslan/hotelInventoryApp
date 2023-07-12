@@ -1,8 +1,8 @@
-{{ roomForm.pristine | json }}
+<!-- {{ roomForm.pristine | json }}
 {{ roomForm.dirty | json }}
 {{ roomForm.valid | json }}
 {{ roomForm.invalid | json }}
-{{ roomForm.value | json }}
+{{ roomForm.value | json }} -->
 <div *ngIf="successMessage !== ''" class="alert alert-success">
   {{ successMessage }}
 </div>
@@ -19,6 +19,7 @@
       name="RoomTitle"
       placeholder="Room Title"
       [(ngModel)]="room.roomType"
+      [ngModelOptions]="{updateOn:'blur'}"
     />
     <span class="text text-danger" *ngIf="roomTitle.dirty && roomTitle.errors?.['required']">Room title Is Required</span>
     <span class="text text-danger" *ngIf="roomTitle.dirty && roomTitle.errors?.['minlength']">Room title MinLength Is (3)</span>

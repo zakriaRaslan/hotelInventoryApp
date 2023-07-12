@@ -5,8 +5,8 @@ import { RoomsComponent } from './rooms.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { RoomBookingComponent } from './room-booking/room-booking.component';
 import { RoomAddComponent } from './room-add/room-add.component';
-import { FormsModule } from '@angular/forms';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { FilterPipe } from './CustomPipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -14,7 +14,8 @@ import { FormsModule } from '@angular/forms';
     RoomsListComponent,
     RoomBookingComponent,
     RoomAddComponent,
+    // FilterPipe,
   ],
-  imports: [CommonModule, RoomsRoutingModule, FormsModule,],
+  imports: [CommonModule, RoomsRoutingModule, FormsModule, ReactiveFormsModule],
 })
 export class RoomsModule {}

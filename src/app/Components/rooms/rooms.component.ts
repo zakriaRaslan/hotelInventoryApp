@@ -7,12 +7,14 @@ import {
   ViewChildren,
   QueryList,
   OnDestroy,
+  Input,
 } from '@angular/core';
 import { Room, RoomList } from './room';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './room-services/rooms.service';
 import { Observable, Subject, Subscription, catchError, map, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'hInv-rooms',
@@ -33,6 +35,7 @@ export class RoomsComponent
     availableRooms: 10,
     bookedRooms: 5,
   };
+
   stream = new Observable((observer) => {
     observer.next('user1');
     observer.next('user2');
@@ -41,7 +44,7 @@ export class RoomsComponent
     // observer.error("error");
   });
 
-  constructor(private roomsService:RoomsService) {}
+  constructor(private roomsService: RoomsService) {}
 
   // @ViewChild(HeaderComponent,{static:true}) headerComponent!: HeaderComponent;
   @ViewChild(HeaderComponent) headerComponent!: HeaderComponent;
@@ -50,19 +53,16 @@ export class RoomsComponent
 
   subscription!: Subscription;
   // rooms$ = this.roomsService.getRooms$;
-
-error$=new Subject<string>;
-roomsCount$ = this.roomsService.getRooms$.pipe(
-  map((rooms)=>rooms.length)
-)
-rooms$=this.roomsService.getRooms$.pipe(
-  catchError((err)=>{
-    this.error$.next(err.message);
-    return of([])
-  })
-)
-getError$ = this.error$.asObservable();
-
+  priceFilter = new FormControl(0);
+  error$ = new Subject<string>();
+  roomsCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
+  rooms$? = this.roomsService.getRooms$.pipe(
+    catchError((err) => {
+      this.error$.next(err.message);
+      return of([]);
+    })
+  );
+  getError$ = this.error$.asObservable();
 
   ngOnInit(): void {
     // console.log(this.headerComponent);

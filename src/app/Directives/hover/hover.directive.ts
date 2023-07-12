@@ -13,7 +13,7 @@ export class HoverDirective implements OnInit {
   }
 
   @HostListener('focus') onMouseEnter(){
-    this.renderer.setStyle(this.element.nativeElement,'border',`4px solid ${this.borderColor}`)
+    this.renderer.setStyle(this.element.nativeElement,'border',`4px solid ${this.borderColor}`);
   }
 
   @HostListener('blur') onMouseLeave(){
