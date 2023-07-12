@@ -1,0 +1,112 @@
+{{ roomForm.pristine | json }}
+{{ roomForm.dirty | json }}
+{{ roomForm.valid | json }}
+{{ roomForm.invalid | json }}
+{{ roomForm.value | json }}
+<div *ngIf="successMessage !== ''" class="alert alert-success">
+  {{ successMessage }}
+</div>
+<form #roomForm="ngForm" (ngSubmit)="addRoom(roomForm)">
+  <div class="form-group">
+    <Label class="form-label">Room Title</Label>
+    <input
+    #roomTitle="ngModel"
+      required
+      minlength="3"
+      maxlength="20"
+      type="text"
+      class="form-control"
+      name="RoomTitle"
+      placeholder="Room Title"
+      [(ngModel)]="room.roomType"
+    />
+    <span class="text text-danger" *ngIf="roomTitle.dirty && roomTitle.errors?.['required']">Room title Is Required</span>
+    <span class="text text-danger" *ngIf="roomTitle.dirty && roomTitle.errors?.['minlength']">Room title MinLength Is (3)</span>
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room Amenities</Label>
+    <input #roomAmenities="ngModel"
+      required
+      minlength="5"
+      maxlength="100"
+      type="text"
+      class="form-control"
+      name="Amenities"
+      placeholder="Amenities"
+      [(ngModel)]="room.amenities"
+    />
+    <span class="text text-danger" *ngIf="roomAmenities.dirty && roomAmenities.errors?.['required']" >The Amenities Is Required</span>
+    <span class="text text-danger" *ngIf="roomAmenities.dirty && roomAmenities.errors?.['minlength']" >The Amenities Minlength Is (5)</span>
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room price</Label>
+    <input
+    #roomPrice="ngModel"
+      required
+      type="number"
+      class="form-control"
+      name="RoomPrice"
+      placeholder="Room Price"
+      [(ngModel)]="room.price"
+    />
+    <span class="text text-danger" *ngIf="roomPrice.dirty && roomPrice.errors?.['required']">The Price Is Required</span>
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room photos</Label>
+    <input
+    #roomPhoto="ngModel"
+      required
+      type="text"
+      class="form-control"
+      name="RoomPhoto"
+      placeholder="Room Photos (Link)"
+      [(ngModel)]="room.photos"
+    />
+    <span class="text text-danger" *ngIf="roomPhoto.dirty && roomPhoto.errors?.['required']">The RoomPhoto Is Required</span>
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room Check In Time</Label>
+    <input
+      required
+      type="datetime"
+      class="form-control"
+      name="CheckinTime"
+      placeholder="Room CheckinTime"
+      [(ngModel)]="room.checkinTime"
+    />
+
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room Check Out Time</Label>
+    <input
+      required
+      type="datetime"
+      class="form-control"
+      name="CheckoutTime"
+      placeholder="Room CheckoutTime"
+      [(ngModel)]="room.checkoutTime"
+    />
+  </div>
+  <div class="form-group">
+    <Label class="form-label">Room Rating</Label>
+    <input
+      required
+      type="number"
+      class="form-control"
+      name="RoomRating"
+      placeholder="Room Rating"
+      max="10"
+      min="1"
+      [(ngModel)]="room.rating"
+    />
+  </div>
+  <div>
+    <button
+      [disabled]="roomForm.invalid"
+      type="submit"
+      class="btn btn-primary mt-3"
+    >
+      Add Room
+    </button>
+  </div>
+</form>
